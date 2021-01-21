@@ -29,8 +29,8 @@
                 <div class="row">
                     <div class="col-md-4">
                         <select asp-for="occupation" asp-items="@(new SelectList(Model.Occupations,"OccupationRating","OccupationName"))" style="height:40px;width:350px">
-                            <option>Please select Occupation</option>
-                        </select>
+                    <option>Please select Occupation</option>
+                </select>
                     </div>
                 </div>
                 <span asp-validation-for="occupation" class="text-danger"></span>
@@ -70,7 +70,7 @@
                     changeYear: true,
                     showButtonPanel: true
                 }
-            ).on('change', function () {
+              ).on('change', function () {
                 var age = getAge(this);
                 if (age > 0) {
                     $("#Age").val(age);

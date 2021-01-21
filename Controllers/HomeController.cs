@@ -12,7 +12,7 @@ namespace PremiumCalc.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-       
+
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -71,6 +71,7 @@ namespace PremiumCalc.Controllers
         //Populate Occupation list with Hard coded values
         private IEnumerable<Occupation> GetOccupationList()
         {
+
             return new List<Occupation>
             {
             new Occupation

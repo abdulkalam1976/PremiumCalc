@@ -39,6 +39,6 @@ namespace PremiumCalc.Models
         public string PremiumAmount { get; set; }
 
         public IEnumerable<Occupation> Occupations { get; set; }
-
+     
     }
 }
