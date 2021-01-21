@@ -1,6 +1,6 @@
 <h2>Project Description</h2>
 
-Member access the web page and provide basic details i.e. Name, Date of Birth, Age, Plans, Sum Assured and system calculates monthly premiums and displayed on the screen.
+Member access the web page and provide basic details i.e. Name, Date of Birth, Age, Occupation, Sum Assured and system calculates monthly premiums and displayed on the screen.
 
 <h2>About Platform/ Tools</h2>
 ASP.Net Core MVC 5.0, C#, JQuery, Bootstrap
