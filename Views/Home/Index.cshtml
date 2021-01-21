@@ -1,0 +1,119 @@
+﻿@model PremiumCalc.Models.CustomerModel
+
+@{
+    ViewData["Title"] = "PremiumCalculator";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input id="FactorVal" name="FactorVal" type="hidden" value="0" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dob" class="control-label"></label>
+                <input asp-for="Dob" id="datepicker" type="text" class="form-control" placeholder="Select Date" />
+                <span asp-validation-for="Dob" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Age" class="control-label"></label>
+                <input asp-for="Age" class="form-control" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="occupation" class="control-label"></label>
+                <div class="row">
+                    <div class="col-md-4">
+                        <select asp-for="occupation" asp-items="@(new SelectList(Model.Occupations,"OccupationRating","OccupationName"))" style="height:40px;width:350px">
+                            <option>Please select Occupation</option>
+                        </select>
+                    </div>
+                </div>
+                <span asp-validation-for="occupation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeathSumInsured" class="control-label"></label>
+                <input asp-for="DeathSumInsured" class="form-control" />
+                <span asp-validation-for="DeathSumInsured" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PremiumAmount" class="control-label"></label>
+                <label for="a" id="FinalP" class="control-label" style="font-size:larger;color:brown;font-weight:600"></label>
+                <span asp-validation-for="PremiumAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script>
+        $(function () {
+            $("#datepicker").datepicker(
+                {
+                    dateFormat: "dd-M-yy",
+                    yearRange: "-100:+0",
+                    changeMonth: true,
+                    changeYear: true,
+                    showButtonPanel: true
+                }
+            ).on('change', function () {
+                var age = getAge(this);
+                if (age > 0) {
+                    $("#Age").val(age);
+                }
+            });
+
+            function getAge(dateVal) {
+                var timeDiff = Math.abs(Date.now() - new Date(dateVal.value));
+                return Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
+            }
+
+            $("#occupation").on("change", function () {
+                var url = '@Url.Action("getRatingFactor")';
+                $.getJSON(url, { rating: $(this).val() }, function (response) {
+                    if (response > 0) {
+                        $("#FactorVal").val(response);
+                        calculatePremium();
+                    }
+            });
+
+
+            });
+
+            $("#Age,#DeathSumInsured").on("change", function () {
+                calculatePremium();
+                
+            });
+
+            function calculatePremium() {
+                var coverageamt = $("#DeathSumInsured").val();
+                var age = $("#Age").val();
+                var occupationrating = $("#FactorVal").val();
+                var Premiumamt=0;
+
+                if (coverageamt > 0 && occupationrating > 0 && age > 0) {
+                    Premiumamt = Math.floor((coverageamt * occupationrating * age) / 1000 * 12);
+                }
+
+                $("#FinalP").text(Premiumamt);
+
+            }
+        });
+    </script>
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
