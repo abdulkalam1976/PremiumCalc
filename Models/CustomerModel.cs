@@ -22,7 +22,7 @@ namespace PremiumCalc.Models
 
         [Required(ErrorMessage = "Enter your Age")]
         [Display(Name = "Age")]
-        [Range(1, 120, ErrorMessage = "Age must be between 1-120 in years.")]
+        //[Range(1, 120, ErrorMessage = "Age must be between 1-120 in years.")]
         public int Age { get; set; }
 
         [Required(ErrorMessage = "Enter Occupation")]
