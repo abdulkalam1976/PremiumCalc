@@ -31,9 +31,9 @@ namespace PremiumCalc.Models
 
         [Required(ErrorMessage = "Enter Sum Insured")]
         [Display(Name = "Death- Sum Insured")]
-        [Column(TypeName = "numeric")]
         [Range(1, 500000000, ErrorMessage = "Sum Insured must be between 1-500000000 in amount")]
-        public decimal DeathSumInsured { get; set; }
+        [DisplayFormat(DataFormatString = "{0:#}")]
+        public float DeathSumInsured { get; set; }
 
         [Display(Name = "Premium Amount")]
         public string PremiumAmount { get; set; }

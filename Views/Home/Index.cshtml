@@ -21,30 +21,39 @@
             </div>
             <div class="form-group">
                 <label asp-for="Age" class="control-label"></label>
-                <input asp-for="Age" class="form-control" />
+                <input asp-for="Age" class="form-control" style="background-color: white" disabled />
                 <span asp-validation-for="Age" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="occupation" class="control-label"></label>
                 <div class="row">
                     <div class="col-md-4">
-                        <select asp-for="occupation" asp-items="@(new SelectList(Model.Occupations,"OccupationRating","OccupationName"))" style="height:40px;width:350px">
-                    <option>Please select Occupation</option>
-                </select>
+                        <select asp-for="occupation" asp-items="@(new SelectList(Model.Occupations,"OccupationRating","OccupationName"))" class="form-control" style="height:40px;width:350px">
+                            <option>Please select Occupation</option>
+                        </select>
                     </div>
                 </div>
                 <span asp-validation-for="occupation" class="text-danger"></span>
             </div>
-            <div class="form-group">
+
+            <div class="form-group input-group mb-3">
                 <label asp-for="DeathSumInsured" class="control-label"></label>
-                <input asp-for="DeathSumInsured" class="form-control" />
-                <span asp-validation-for="DeathSumInsured" class="text-danger"></span>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input asp-for="DeathSumInsured" class="form-control" />
+                    <span asp-validation-for="DeathSumInsured" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="PremiumAmount" class="control-label"></label>
-                <label for="a" id="FinalP" class="control-label" style="font-size:larger;color:brown;font-weight:600"></label>
-                <span asp-validation-for="PremiumAmount" class="text-danger"></span>
+
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Premium Amount</span>
+                </div>
+                <input id="FinalP"  class="form-control" style="font-size:larger;color:brown;font-weight:600;background-color:white" disabled/>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Submit" class="btn btn-primary" />
             </div>
@@ -68,13 +77,13 @@
                     yearRange: "-100:+0",
                     changeMonth: true,
                     changeYear: true,
-                    showButtonPanel: true
+                    showButtonPanel: true,
+                    maxDate: new Date()
                 }
               ).on('change', function () {
                 var age = getAge(this);
-                if (age > 0) {
-                    $("#Age").val(age);
-                }
+                  $("#Age").val(age);
+                  calculatePremium();
             });
 
             function getAge(dateVal) {
@@ -94,9 +103,14 @@
 
             });
 
-            $("#Age,#DeathSumInsured").on("change", function () {
+            $("#DeathSumInsured").on("change", function () {
                 calculatePremium();
-                
+            });
+
+            $("#Dob").on("change", function () {
+                var age = getAge(this);
+                $("#Age").val(age);
+                calculatePremium();
             });
 
             function calculatePremium() {
@@ -109,7 +123,13 @@
                     Premiumamt = Math.floor((coverageamt * occupationrating * age) / 1000 * 12);
                 }
 
-                $("#FinalP").text(Premiumamt);
+                // Create USD currency formatter.
+                var formatter = new Intl.NumberFormat('en-AU', {
+                    style: 'currency',
+                    currency: 'AUD',
+                });
+
+                $("#FinalP").val(formatter.format(Premiumamt));
 
             }
         });
