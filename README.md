@@ -101,6 +101,8 @@ ASP.Net Core MVC 5.0 (VS 2019), C#, JQuery, Bootstrap
          Checks the Validity of Model and Clear data
    </p>
 
+    <p>Note: Unit Test project is kept under PremiumCalcUnitTest.rar so, you can refer the project.</p>
+
 <h2>Output Screen</h2>
 <p>
 <a href="https://github.com/abdulkalam1976/PremiumCalc/blob/master/p1.JPG" target="_blank">
