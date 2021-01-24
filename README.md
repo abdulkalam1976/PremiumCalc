@@ -3,7 +3,7 @@
 As a Member I would like to have an ability to choose various options on the screen  So that I can view the monthly premiums calculated and displayed on the screen.
 
 <h2>About Platform/ Tools</h2>
-ASP.Net Core MVC 5.0, C#, JQuery, Bootstrap
+ASP.Net Core MVC 5.0 (VS 2019), C#, JQuery, Bootstrap
 
 <h2>Development Approach</h2>
 
