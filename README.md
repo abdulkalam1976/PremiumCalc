@@ -103,17 +103,17 @@ ASP.Net Core MVC 5.0, C#, JQuery, Bootstrap
 
 <h2>Output Screen</h2>
 <p>
-<a href="https://github.com/abdulkalam1976/MyPremium/blob/master/p1.JPG" target="_blank">
+<a href="https://github.com/abdulkalam1976/PremiumCalc/blob/master/p1.JPG" target="_blank">
   Starting Index Page
 </a>
 </p>
 <p>
-<a href="https://github.com/abdulkalam1976/MyPremium/blob/master/p2.JPG" target="_blank">
+<a href="https://github.com/abdulkalam1976/PremiumCalc/blob/master/p2.JPG" target="_blank">
   Validation Page
 </a>
    </p>
    <p>
-<a href="https://github.com/abdulkalam1976/MyPremium/blob/master/p3.JPG" target="_blank">
+<a href="https://github.com/abdulkalam1976/PremiumCalc/blob/master/p3.JPG" target="_blank">
   Output Page
 </a>
    </p>
